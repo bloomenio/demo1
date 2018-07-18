@@ -19,7 +19,7 @@ Participants : Media Content Publishers and Consumers
 
 ## Prerequisites
 * Hyperledger Fabric Installation
-* Hyperledger Explorer Installation
+* Hyperledger Composer Installation
 * MySQL
 * Hyperledger Explorer Ιnstallation
 
