@@ -9,8 +9,8 @@ if [ "$(docker ps -aq)" > /dev/null ];then docker kill $(docker ps -aq); docker 
 # docker rmi $(docker images dev-* -q)
 # Shutdown any programs listening on ports 3000, 9090, of localhost.
 # if [ "$(lsof -ti :80)" > /dev/null ];then kill -9 $(lsof -ti :80); fi
-if [ "$(lsof -ti :9090)" > /dev/null ];then kill -9 $(lsof -ti :9090); fi
-if [ "$(lsof -ti :3000)" > /dev/null ];then kill -9 $(lsof -ti :3000); fi
+if [ "$(sudo lsof -ti :9090)" > /dev/null ];then kill -9 $(sudo lsof -ti :9090); fi
+if [ "$(sudo lsof -ti :3000)" > /dev/null ];then kill -9 $(sudo lsof -ti :3000); fi
 
 echo "Running Demonstrator of first Technical Review in Brussels, April 2018..."
 wd=$PWD
