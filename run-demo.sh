@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e  # To exit on first error.
 
-sudo apt-get update
-
 # Cleaning.
 if [ "$(docker ps -aq --filter 'exited=255')" > /dev/null ];then docker rm $(docker ps -aq --filter 'exited=255'); fi
 if [ "$(docker ps -aq --filter 'exited=137')" > /dev/null ];then docker rm $(docker ps -aq --filter 'exited=137'); fi
