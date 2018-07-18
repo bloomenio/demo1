@@ -14,7 +14,7 @@ if [ "$(lsof -ti :3000)" > /dev/null ];then kill -9 $(lsof -ti :3000); fi
 
 echo "Running Demonstrator of first Technical Review in Brussels, April 2018..."
 wd=$PWD
-cd hyperledger_composer_demo-master/
+cd hyperledger_composer_demo/
 if [ -f nohup.out ];then rm nohup.out; fi
 nohup /bin/bash ./run.sh &
 while [ "$(tail -1 nohup.out)" != "Browse your REST API at http://localhost:3000/explorer" ];do sleep 5; done
