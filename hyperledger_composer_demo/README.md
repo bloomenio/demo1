@@ -42,7 +42,7 @@ composer network start --card PeerAdmin@hlfv1 --networkAdmin admin --networkAdmi
 
 composer card import --file networkadmin.card
 
-composer-rest-server
+composer-rest-server -c admin@news-network -n never -w true
 ```
 Now you are ready to browse the REST API at http://localhost:3000!
 
