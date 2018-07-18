@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Hyperledger Demo</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-primary navbar-inverse fixed-top">
+            <a class="navbar-brand" href="#">Hyperledger</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#users">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#media">Media content</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#transactions">Transactions</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container" id="app">
+            <div id="users">
+                <h3>
+                    List of app users 
+                    <button class="btn btn-light" @click="loadUsers(true)">
+                        <img src="img/reload.png" alt="Reload"/>
+                    </button>
+                </h3>
+                <table class="table table-light table-striped">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th># ID</th>
+                            <th>Name</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-cloak v-for="(v,i) in users" @click="assetsPublished(i)">
+                            <td :title="v.userId">{{v.userId}}</td>
+                            <td>{{v | getUserName}}</td>
+                            <td>{{v.balance}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="media">
+                <h3>
+                    Media content assets 
+                    <button class="btn btn-light" @click="loadMedia(true)">
+                        <img src="img/reload.png" alt="Reload"/>
+                    </button>
+                </h3>
+                <table class="table table-light table-striped">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th># ID</th>
+                            <th>Publisher</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Url</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-cloak v-for="(v,i) in newsmedia">
+                            <td :title="v.newsId">{{v.newsId}}</td>
+                            <td>{{v.publisher | getID | getUserName}}</td>
+                            <td>{{v.title}}</td>
+                            <td>{{v.description}}</td>
+                            <td @click="onUrlChange($event,v)">
+                                <span v-show="!v.onUrlChange">{{v.urls}}</span>
+                                <input type="text" v-show="v.onUrlChange" :placeholder="v.urls" @blur="changeUrl($event,v)" v-model="v.newUrl">
+                            </td>
+                            <td>{{v.value}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <form>
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="newsId">ID</label>
+                            <input type="text" v-model="mnewform.newsId" class="form-control" id="newsId">
+                        </div>
+                        <div class="col-3">
+                            <label for="publisher">Publisher</label>
+                            <select class="form-control" id="publisher" v-model="mnewform.publisher">
+                                <option v-cloak v-for="(v, k) in users" v-bind:value="v.$class+'#'+v.userId">{{k | getUserName}}</option>
+                            </select>
+                        </div>
+                        <div class="col-5">
+                            <label for="urls">URL</label>
+                            <input type="text" v-model="mnewform.urls" class="form-control" id="urls">
+                        </div>
+                        <div class="col-2">
+                            <label for="value">value</label>
+                            <input type="number" v-model="mnewform.value" class="form-control" id="value">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-5">
+                            <label for="title">Title</label>
+                            <input type="text" v-model="mnewform.title" class="form-control" id="title">
+                        </div>
+                        <div class="col-5">
+                            <label for="description">Description</label>
+                            <input type="text" v-model="mnewform.description" class="form-control" id="description">
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn-primary" v-on:click="uploadMedia">Upload</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="transactions">
+                <h3>Transactions</h3>
+                <div>
+                    <h5>
+                        Media content asset 
+                        <button class="btn btn-light" @click="loadMediaTran(true)">
+                            <img src="img/reload.png" alt="Reload"/>
+                        </button>
+                    </h5>
+                    <table class="table table-light table-striped">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th># ID</th>
+                                <th>Consumer</th>
+                                <th>Media content</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-cloak v-for="(v,i) in mediatran">
+                                <td :title="v.transactionId">{{v.transactionId | shorter}}</td>
+                                <td>{{v.consumer | getID | getUserName}}</td>
+                                <td>#{{v.newsdata | getID | mediaTitle}}</td>
+                                <td>{{v.timestamp | dateformat}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form>
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="media_id">Media content</label>
+                                <select class="form-control" id="media_id" v-model="mediaform.media_id">
+                                    <option v-cloak v-for="(v, k) in newsmedia" v-bind:value="k">#{{k | mediaTitle}}</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label for="media_receiver">Consumer</label>
+                                <select class="form-control" id="media_receiver" v-model="mediaform.media_receiver">
+                                    <option v-cloak v-for="(v, k) in users" v-bind:value="k">{{k | getUserName}}</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <label for="media_value">Credits</label>
+                                <input type="number" disabled v-model="mediaform.media_value" class="form-control" id="media_value" placeholder="Value.." size="6">
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="btn btn-primary" v-on:click="sendMedia">Buy</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <h5>
+                        Credits 
+                        <button class="btn btn-light" @click="loadTran(true)">
+                            <img src="img/reload.png" alt="Reload"/>
+                        </button>
+                    </h5>
+                    <table class="table table-light table-striped">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th># ID</th>
+                                <th>Sender</th>
+                                <th>Receiver</th>
+                                <th>Value</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-cloak v-for="(v,i) in tran">
+                                <td :title="v.transactionId">{{v.transactionId | shorter}}</td>
+                                <td>{{v.payer | getID | getUserName}}</td>
+                                <td>{{v.receiving | getID | getUserName}}</td>
+                                <td>{{v.value}}</td>
+                                <td>{{v.timestamp | dateformat}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form>
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="credit_sender">Sender</label>
+                                <select class="form-control" id="credit_sender" v-model="tranform.credit_sender">
+                                    <option v-cloak v-for="(v, k) in users" v-bind:value="k">{{k | getUserName}}</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label for="credit_receiver">Receiver</label>
+                                <select class="form-control" id="credit_receiver" v-model="tranform.credit_receiver">
+                                    <option v-cloak v-for="(v, k) in users" v-bind:value="k">{{k | getUserName}}</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <label for="credit_amount">Credits</label>
+                                <input type="number" v-model="tranform.credit_amount" class="form-control" id="credit_amount" placeholder="Amount .." size="6">
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="btn btn-primary" v-on:click="sendCredits">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <table id="ownerAssetsTable" style="display:none" class="table table-light table-striped">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th># ID</th>
+                        <th>Title</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-cloak v-for="(v,i) in ownerAssets.data">
+                        <td :title="v.newsId">{{v.newsId}}</td>
+                        <td>{{v.title}}</td>
+                        <td>{{v.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/vue.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/alertify.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
