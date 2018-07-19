@@ -21,4 +21,6 @@ while [ "$(tail -1 nohup.out)" != "Browse your REST API at http://localhost:3000
 nohup /bin/bash ./run-explorer.sh &
 while [ "$(tail -1 nohup.out)" != "Please open Internet explorer to access ：http://localhost:9090/" ];do sleep 5; done
 cd $wd/frontend/
+/bin/bash input-users.sh &
+sleep 3
 /bin/bash run-frontend.sh &
