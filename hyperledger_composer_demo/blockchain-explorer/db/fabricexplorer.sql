@@ -37,6 +37,7 @@ CREATE TABLE `blocks` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='blocks';
 
 -- ----------------------------
+
 --  Table structure for `chaincodes`
 -- ----------------------------
 DROP TABLE IF EXISTS `chaincodes`;

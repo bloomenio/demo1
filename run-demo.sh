@@ -15,9 +15,8 @@ if [ -f nohup.out ];then rm nohup.out; fi
 nohup /bin/bash ./run.sh &
 sleep 1
 while [ "$(tail -1 nohup.out)" != "Browse your REST API at http://localhost:3000/explorer" ];do sleep 5; done
-nohup /bin/bash ./run-explorer.sh &
-while [ "$(tail -1 nohup.out)" != "Please open Internet explorer to access ：http://localhost:9090/" ];do sleep 5; done
+/bin/bash ./run-explorer.sh &
 cd $wd/frontend/
 /bin/bash input-users.sh &
-sleep 3
+sleep 6
 /bin/bash run-frontend.sh &

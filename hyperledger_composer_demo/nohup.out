@@ -18,11 +18,11 @@ ARCH=$ARCH docker-compose -f "${DIR}"/composer/docker-compose.yml down
 Removing network composer_default
 ARCH=$ARCH docker-compose -f "${DIR}"/composer/docker-compose.yml up -d
 Creating network "composer_default" with the default driver
-Creating orderer.example.com ... 
 Creating ca.org1.example.com ... 
+Creating orderer.example.com ... 
 Creating couchdb ... 
-Creating ca.org1.example.com
 Creating orderer.example.com
+Creating ca.org1.example.com
 Creating couchdb
 [1A[2KCreating ca.org1.example.com ... [32mdone[0m[1B[1A[2KCreating couchdb ... [32mdone[0m[1B[1A[2KCreating orderer.example.com ... [32mdone[0m[1BCreating peer0.org1.example.com ... 
 Creating peer0.org1.example.com
@@ -35,59 +35,49 @@ sleep ${FABRIC_START_TIMEOUT}
 
 # Create the channel
 docker exec peer0.org1.example.com peer channel create -o orderer.example.com:7050 -c composerchannel -f /etc/hyperledger/configtx/composer-channel.tx
-[36m2018-09-06 10:15:51.259 UTC [msp] GetLocalMSP -> DEBU 001[0m Returning existing local MSP
-[36m2018-09-06 10:15:51.260 UTC [msp] GetDefaultSigningIdentity -> DEBU 002[0m Obtaining default signing identity
-2018-09-06 10:15:51.264 UTC [channelCmd] InitCmdFactory -> INFO 003[0m Endorser and orderer connections initialized
-[36m2018-09-06 10:15:51.273 UTC [msp] GetLocalMSP -> DEBU 004[0m Returning existing local MSP
-[36m2018-09-06 10:15:51.273 UTC [msp] GetDefaultSigningIdentity -> DEBU 005[0m Obtaining default signing identity
-[36m2018-09-06 10:15:51.274 UTC [msp] GetLocalMSP -> DEBU 006[0m Returning existing local MSP
-[36m2018-09-06 10:15:51.274 UTC [msp] GetDefaultSigningIdentity -> DEBU 007[0m Obtaining default signing identity
-[36m2018-09-06 10:15:51.274 UTC [msp/identity] Sign -> DEBU 008[0m Sign: plaintext: 0A8C060A074F7267314D53501280062D...6D706F736572436F6E736F727469756D 
-[36m2018-09-06 10:15:51.274 UTC [msp/identity] Sign -> DEBU 009[0m Sign: digest: 3B9E894D5FEFD50AAE6C92DBB9B72EA6AED4487E4500FC0170D63FC3FB5C0340 
-[36m2018-09-06 10:15:51.275 UTC [msp] GetLocalMSP -> DEBU 00a[0m Returning existing local MSP
-[36m2018-09-06 10:15:51.275 UTC [msp] GetDefaultSigningIdentity -> DEBU 00b[0m Obtaining default signing identity
-[36m2018-09-06 10:15:51.275 UTC [msp] GetLocalMSP -> DEBU 00c[0m Returning existing local MSP
-[36m2018-09-06 10:15:51.275 UTC [msp] GetDefaultSigningIdentity -> DEBU 00d[0m Obtaining default signing identity
-[36m2018-09-06 10:15:51.276 UTC [msp/identity] Sign -> DEBU 00e[0m Sign: plaintext: 0AC9060A1B08021A0608D7FCC3DC0522...04DD1203C405B2342F3A5D23B17D2EBA 
-[36m2018-09-06 10:15:51.276 UTC [msp/identity] Sign -> DEBU 00f[0m Sign: digest: 67A3ED441BBBC2B9D3333C71F76AA181C84FC110028BEE5ED4FBCE31F742E218 
-[36m2018-09-06 10:15:51.656 UTC [msp] GetLocalMSP -> DEBU 010[0m Returning existing local MSP
-[36m2018-09-06 10:15:51.657 UTC [msp] GetDefaultSigningIdentity -> DEBU 011[0m Obtaining default signing identity
-[36m2018-09-06 10:15:51.657 UTC [msp] GetLocalMSP -> DEBU 012[0m Returning existing local MSP
-[36m2018-09-06 10:15:51.657 UTC [msp] GetDefaultSigningIdentity -> DEBU 013[0m Obtaining default signing identity
-[36m2018-09-06 10:15:51.658 UTC [msp/identity] Sign -> DEBU 014[0m Sign: plaintext: 0AC9060A1B08021A0608D7FCC3DC0522...097C9227AD3612080A021A0012021A00 
-[36m2018-09-06 10:15:51.658 UTC [msp/identity] Sign -> DEBU 015[0m Sign: digest: DA2BCF2DC15D4A511596E90AB4B058D021E8286F0F66B4421144DA70A811BDB7 
-[36m2018-09-06 10:15:51.713 UTC [channelCmd] readBlock -> DEBU 016[0m Got status: &{NOT_FOUND}
-[36m2018-09-06 10:15:51.714 UTC [msp] GetLocalMSP -> DEBU 017[0m Returning existing local MSP
-[36m2018-09-06 10:15:51.715 UTC [msp] GetDefaultSigningIdentity -> DEBU 018[0m Obtaining default signing identity
-2018-09-06 10:15:51.729 UTC [channelCmd] InitCmdFactory -> INFO 019[0m Endorser and orderer connections initialized
-[36m2018-09-06 10:15:51.938 UTC [msp] GetLocalMSP -> DEBU 01a[0m Returning existing local MSP
-[36m2018-09-06 10:15:51.939 UTC [msp] GetDefaultSigningIdentity -> DEBU 01b[0m Obtaining default signing identity
-[36m2018-09-06 10:15:51.939 UTC [msp] GetLocalMSP -> DEBU 01c[0m Returning existing local MSP
-[36m2018-09-06 10:15:51.939 UTC [msp] GetDefaultSigningIdentity -> DEBU 01d[0m Obtaining default signing identity
-[36m2018-09-06 10:15:51.940 UTC [msp/identity] Sign -> DEBU 01e[0m Sign: plaintext: 0AC9060A1B08021A0608D7FCC3DC0522...53267756F71D12080A021A0012021A00 
-[36m2018-09-06 10:15:51.940 UTC [msp/identity] Sign -> DEBU 01f[0m Sign: digest: 803BDA11144D1FBCAF1D8985190614653A772F84B7D34ADD9E313C0E8ACD1EB7 
-[36m2018-09-06 10:15:51.941 UTC [channelCmd] readBlock -> DEBU 020[0m Got status: &{NOT_FOUND}
-[36m2018-09-06 10:15:51.942 UTC [msp] GetLocalMSP -> DEBU 021[0m Returning existing local MSP
-[36m2018-09-06 10:15:51.942 UTC [msp] GetDefaultSigningIdentity -> DEBU 022[0m Obtaining default signing identity
-2018-09-06 10:15:51.944 UTC [channelCmd] InitCmdFactory -> INFO 023[0m Endorser and orderer connections initialized
-[36m2018-09-06 10:15:52.146 UTC [msp] GetLocalMSP -> DEBU 024[0m Returning existing local MSP
-[36m2018-09-06 10:15:52.147 UTC [msp] GetDefaultSigningIdentity -> DEBU 025[0m Obtaining default signing identity
-[36m2018-09-06 10:15:52.147 UTC [msp] GetLocalMSP -> DEBU 026[0m Returning existing local MSP
-[36m2018-09-06 10:15:52.147 UTC [msp] GetDefaultSigningIdentity -> DEBU 027[0m Obtaining default signing identity
-[36m2018-09-06 10:15:52.148 UTC [msp/identity] Sign -> DEBU 028[0m Sign: plaintext: 0AC9060A1B08021A0608D8FCC3DC0522...1547534ADDB112080A021A0012021A00 
-[36m2018-09-06 10:15:52.148 UTC [msp/identity] Sign -> DEBU 029[0m Sign: digest: 7D91B7F8620A6E123B8EB00C6CC8DF4C129C8B6EC0ED3ECAEBBDFE1A8EA0CCA8 
-[36m2018-09-06 10:15:52.156 UTC [channelCmd] readBlock -> DEBU 02a[0m Received block: 0
-2018-09-06 10:15:52.157 UTC [main] main -> INFO 02b[0m Exiting.....
+[36m2018-09-06 13:34:02.599 UTC [msp] GetLocalMSP -> DEBU 001[0m Returning existing local MSP
+[36m2018-09-06 13:34:02.600 UTC [msp] GetDefaultSigningIdentity -> DEBU 002[0m Obtaining default signing identity
+2018-09-06 13:34:02.610 UTC [channelCmd] InitCmdFactory -> INFO 003[0m Endorser and orderer connections initialized
+[36m2018-09-06 13:34:02.618 UTC [msp] GetLocalMSP -> DEBU 004[0m Returning existing local MSP
+[36m2018-09-06 13:34:02.619 UTC [msp] GetDefaultSigningIdentity -> DEBU 005[0m Obtaining default signing identity
+[36m2018-09-06 13:34:02.620 UTC [msp] GetLocalMSP -> DEBU 006[0m Returning existing local MSP
+[36m2018-09-06 13:34:02.621 UTC [msp] GetDefaultSigningIdentity -> DEBU 007[0m Obtaining default signing identity
+[36m2018-09-06 13:34:02.622 UTC [msp/identity] Sign -> DEBU 008[0m Sign: plaintext: 0A8C060A074F7267314D53501280062D...6D706F736572436F6E736F727469756D 
+[36m2018-09-06 13:34:02.622 UTC [msp/identity] Sign -> DEBU 009[0m Sign: digest: 7027ECEC3DB4F0175142C43E8EC6E5037696703CF2FCCFF94825BAECE6E35D5A 
+[36m2018-09-06 13:34:02.624 UTC [msp] GetLocalMSP -> DEBU 00a[0m Returning existing local MSP
+[36m2018-09-06 13:34:02.625 UTC [msp] GetDefaultSigningIdentity -> DEBU 00b[0m Obtaining default signing identity
+[36m2018-09-06 13:34:02.626 UTC [msp] GetLocalMSP -> DEBU 00c[0m Returning existing local MSP
+[36m2018-09-06 13:34:02.626 UTC [msp] GetDefaultSigningIdentity -> DEBU 00d[0m Obtaining default signing identity
+[36m2018-09-06 13:34:02.627 UTC [msp/identity] Sign -> DEBU 00e[0m Sign: plaintext: 0AC9060A1B08021A0608CAD9C4DC0522...2A133EFFF44665FE1BB456EBB582805B 
+[36m2018-09-06 13:34:02.628 UTC [msp/identity] Sign -> DEBU 00f[0m Sign: digest: E7CEACF5CF619C5542DB8E7663BF72EBF86AA68D28D59BD3F353FB50E6FD6818 
+[36m2018-09-06 13:34:02.964 UTC [msp] GetLocalMSP -> DEBU 010[0m Returning existing local MSP
+[36m2018-09-06 13:34:02.964 UTC [msp] GetDefaultSigningIdentity -> DEBU 011[0m Obtaining default signing identity
+[36m2018-09-06 13:34:02.965 UTC [msp] GetLocalMSP -> DEBU 012[0m Returning existing local MSP
+[36m2018-09-06 13:34:02.965 UTC [msp] GetDefaultSigningIdentity -> DEBU 013[0m Obtaining default signing identity
+[36m2018-09-06 13:34:02.965 UTC [msp/identity] Sign -> DEBU 014[0m Sign: plaintext: 0AC9060A1B08021A0608CAD9C4DC0522...301081F97D5512080A021A0012021A00 
+[36m2018-09-06 13:34:02.966 UTC [msp/identity] Sign -> DEBU 015[0m Sign: digest: 1DFAB56A6CB10593D8699D7B901125B0F8A5F97EF0C2119AF086135A702A63BD 
+[36m2018-09-06 13:34:03.010 UTC [channelCmd] readBlock -> DEBU 016[0m Got status: &{NOT_FOUND}
+[36m2018-09-06 13:34:03.011 UTC [msp] GetLocalMSP -> DEBU 017[0m Returning existing local MSP
+[36m2018-09-06 13:34:03.011 UTC [msp] GetDefaultSigningIdentity -> DEBU 018[0m Obtaining default signing identity
+2018-09-06 13:34:03.015 UTC [channelCmd] InitCmdFactory -> INFO 019[0m Endorser and orderer connections initialized
+[36m2018-09-06 13:34:03.216 UTC [msp] GetLocalMSP -> DEBU 01a[0m Returning existing local MSP
+[36m2018-09-06 13:34:03.216 UTC [msp] GetDefaultSigningIdentity -> DEBU 01b[0m Obtaining default signing identity
+[36m2018-09-06 13:34:03.216 UTC [msp] GetLocalMSP -> DEBU 01c[0m Returning existing local MSP
+[36m2018-09-06 13:34:03.216 UTC [msp] GetDefaultSigningIdentity -> DEBU 01d[0m Obtaining default signing identity
+[36m2018-09-06 13:34:03.216 UTC [msp/identity] Sign -> DEBU 01e[0m Sign: plaintext: 0AC9060A1B08021A0608CBD9C4DC0522...610BADE206D012080A021A0012021A00 
+[36m2018-09-06 13:34:03.216 UTC [msp/identity] Sign -> DEBU 01f[0m Sign: digest: 4186AF4F7F209AF492DADEA8AFA0DCCD6A4B69FB3909EF5E792C8E7EBAD29F21 
+[36m2018-09-06 13:34:03.227 UTC [channelCmd] readBlock -> DEBU 020[0m Received block: 0
+2018-09-06 13:34:03.228 UTC [main] main -> INFO 021[0m Exiting.....
 
 # Join peer0.org1.example.com to the channel.
 docker exec -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer0.org1.example.com peer channel join -b composerchannel.block
-[36m2018-09-06 10:15:52.707 UTC [msp] GetLocalMSP -> DEBU 001[0m Returning existing local MSP
-[36m2018-09-06 10:15:52.708 UTC [msp] GetDefaultSigningIdentity -> DEBU 002[0m Obtaining default signing identity
-2018-09-06 10:15:52.711 UTC [channelCmd] InitCmdFactory -> INFO 003[0m Endorser and orderer connections initialized
-[36m2018-09-06 10:15:52.712 UTC [msp/identity] Sign -> DEBU 004[0m Sign: plaintext: 0A8A070A5C08011A0C08D8FCC3DC0510...09B6879402BB1A080A000A000A000A00 
-[36m2018-09-06 10:15:52.712 UTC [msp/identity] Sign -> DEBU 005[0m Sign: digest: 006830CCBCB25B19570DCCBB9D10339B2DCB23E008E37E23D4DE449AB93F149C 
-2018-09-06 10:15:53.121 UTC [channelCmd] executeJoin -> INFO 006[0m Peer joined the channel!
-2018-09-06 10:15:53.122 UTC [main] main -> INFO 007[0m Exiting.....
+[36m2018-09-06 13:34:03.643 UTC [msp] GetLocalMSP -> DEBU 001[0m Returning existing local MSP
+[36m2018-09-06 13:34:03.643 UTC [msp] GetDefaultSigningIdentity -> DEBU 002[0m Obtaining default signing identity
+2018-09-06 13:34:03.646 UTC [channelCmd] InitCmdFactory -> INFO 003[0m Endorser and orderer connections initialized
+[36m2018-09-06 13:34:03.648 UTC [msp/identity] Sign -> DEBU 004[0m Sign: plaintext: 0A8A070A5C08011A0C08CBD9C4DC0510...9EC5095957981A080A000A000A000A00 
+[36m2018-09-06 13:34:03.648 UTC [msp/identity] Sign -> DEBU 005[0m Sign: digest: CB12284ED0D74FCDB7954724F79705602D795C6D8CF664F7F6323C80400868B6 
+2018-09-06 13:34:03.920 UTC [channelCmd] executeJoin -> INFO 006[0m Peer joined the channel!
+2018-09-06 13:34:03.922 UTC [main] main -> INFO 007[0m Exiting.....
 Development only script for Hyperledger Fabric control
 Running 'createPeerAdminCard.sh'
 FABRIC_VERSION is unset, assuming hlfv1
@@ -168,33 +158,3 @@ Adding schemas for all types to Loopback ...
 Added schemas for all types to Loopback
 Web server listening at: http://localhost:3000
 Browse your REST API at http://localhost:3000/explorer
-Change mysql connection password, admin's paths for 'key' & 'cert'.
-If password changed, then up Fabric Explorer.
-ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
-npm WARN fabric-explorer@0.0.1 No repository field.
-
-audited 1061 packages in 13.663s
-found 2 vulnerabilities (1 low, 1 moderate)
-  run `npm audit fix` to fix them, or `npm audit` for details
-npm WARN fabric-explorer@0.0.1 No repository field.
-
-up to date in 6.602s
-fixed 0 of 2 vulnerabilities in 1061 scanned packages
-  2 vulnerabilities required manual review and could not be updated
-mysql connection port= 3306
-Please open Internet explorer to access ：http://localhost:9090/
-fs.js:904
-  return binding.readdir(pathModule._makeLong(path), options.encoding);
-                 ^
-
-Error: ENOENT: no such file or directory, scandir '/home/user/Desktop/demo_v1.1/fabric-dev-servers/fabric-scripts/hlfv1/composer/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore'
-    at Object.fs.readdirSync (fs.js:904:18)
-    at readAllFiles (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/app/helper.js:79:17)
-    at Object.getOrgAdmin (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/app/helper.js:185:27)
-    at getChainInfo (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/app/query.js:92:16)
-    at Object.getChannelHeight (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/app/query.js:205:9)
-    at getMaxBlockNum (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/service/blockscanner.js:100:18)
-    at Object.syncBlock (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/service/blockscanner.js:40:9)
-    at Timeout._onTimeout (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/listener/blocklistener.js:50:22)
-    at ontimeout (timers.js:475:11)
-    at tryOnTimeout (timers.js:310:5)

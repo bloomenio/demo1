@@ -11,7 +11,7 @@ cd blockchain-explorer/
 # nano config.json
 
 echo "If password changed, then up Fabric Explorer."
-mysql -uroot -p < db/fabricexplorer.sql
+mysql --defaults-file=/home/user/demo1/hyperledger_composer_demo/.my.cnf < db/fabricexplorer.sql
 npm install
 npm audit fix
 ./start.sh
