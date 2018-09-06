@@ -213,3 +213,40 @@ npm WARN fabric-explorer@0.0.1 No repository field.
 added 417 packages from 390 contributors and audited 1061 packages in 117.662s
 found 2 vulnerabilities (1 low, 1 moderate)
   run `npm audit fix` to fix them, or `npm audit` for details
+npm WARN fabric-explorer@0.0.1 No repository field.
+
+up to date in 7.536s
+fixed 0 of 2 vulnerabilities in 1061 scanned packages
+  2 vulnerabilities required manual review and could not be updated
+mysql connection port= 3306
+Please open Internet explorer to access ：http://localhost:9090/
+[31m[2018-09-06 12:26:28.335] [ERROR] blockscanner - [39m{ Error: ENOENT: no such file or directory, scandir '/home/user/Desktop/demo_v1.1/fabric-dev-servers/fabric-scripts/hlfv1/composer/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore'
+    at Object.fs.readdirSync (fs.js:904:18)
+    at readAllFiles (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/app/helper.js:79:17)
+    at Object.getOrgAdmin (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/app/helper.js:185:27)
+    at Object.getInstalledChaincodes (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/app/query.js:125:16)
+    at saveChaincodes (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/service/blockscanner.js:127:32)
+    at saveChaincodes.next (<anonymous>)
+    at onFulfilled (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/node_modules/co/index.js:65:19)
+    at /home/user/demo1/hyperledger_composer_demo/blockchain-explorer/node_modules/co/index.js:54:5
+    at new Promise (<anonymous>)
+    at co (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/node_modules/co/index.js:50:10)
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/user/Desktop/demo_v1.1/fabric-dev-servers/fabric-scripts/hlfv1/composer/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore' }
+fs.js:904
+  return binding.readdir(pathModule._makeLong(path), options.encoding);
+                 ^
+
+Error: ENOENT: no such file or directory, scandir '/home/user/Desktop/demo_v1.1/fabric-dev-servers/fabric-scripts/hlfv1/composer/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore'
+    at Object.fs.readdirSync (fs.js:904:18)
+    at readAllFiles (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/app/helper.js:79:17)
+    at Object.getOrgAdmin (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/app/helper.js:185:27)
+    at getChainInfo (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/app/query.js:92:16)
+    at Object.getChannelHeight (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/app/query.js:205:9)
+    at getMaxBlockNum (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/service/blockscanner.js:100:18)
+    at Object.syncBlock (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/service/blockscanner.js:40:9)
+    at Timeout._onTimeout (/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/listener/blocklistener.js:50:22)
+    at ontimeout (timers.js:475:11)
+    at tryOnTimeout (timers.js:310:5)
