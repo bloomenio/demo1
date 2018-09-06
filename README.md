@@ -12,7 +12,7 @@ http://demo1.bloomen.io
 > Install MySQL Server; check hyperledger_composer_demo/run-explorer.sh, lines 3-7 for more information.
 
 ```
-cd demo1/
 sudo apt-get update
+cd demo1/
 ./run-demo.sh
 ```
