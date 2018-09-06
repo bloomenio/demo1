@@ -2,19 +2,15 @@
 set -e  # To exit on first error.
 
 # Cleaning.
-if [ "$(docker ps -aq --filter 'exited=255')" > /dev/null ];then docker rm $(docker ps -aq --filter 'exited=255'); fi
-if [ "$(docker ps -aq --filter 'exited=137')" > /dev/null ];then docker rm $(docker ps -aq --filter 'exited=137'); fi
-if [ "$(docker ps -aq --filter 'exited=2')" > /dev/null ];then docker rm $(docker ps -aq --filter 'exited=2'); fi
-if [ "$(docker ps -aq)" > /dev/null ];then docker kill $(docker ps -aq); docker rm $(docker ps -aq); fi
+if [ "$(docker ps -q)" > /dev/null ];then docker kill $(docker ps -q); fi
+if [ "$(docker ps -aq)" > /dev/null ];then docker rm $(docker ps -aq); fi
 # docker rmi $(docker images dev-* -q)
 # Shutdown any programs listening on ports 3000, 9090, of localhost.
-# if [ "$(lsof -ti :80)" > /dev/null ];then kill -9 $(lsof -ti :80); fi
-if [ "$(sudo lsof -ti :9090)" > /dev/null ];then kill -9 $(sudo lsof -ti :9090); fi
-if [ "$(sudo lsof -ti :3000)" > /dev/null ];then kill -9 $(sudo lsof -ti :3000); fi
+if [ "$(sudo lsof -ti :80,3000,9090)" > /dev/null ];then kill -9 $(sudo lsof -ti :80,3000,9090); fi
 
 echo "Running Demonstrator of first Technical Review in Brussels, April 2018..."
 wd=$PWD
-cd hyperledger_composer_demo/
+cd hyperledger_composer_demo-master/
 if [ -f nohup.out ];then rm nohup.out; fi
 nohup /bin/bash ./run.sh &
 sleep 1
