@@ -1,0 +1,215 @@
+Development only script for Hyperledger Fabric control
+Running 'startFabric.sh'
+FABRIC_VERSION is unset, assuming hlfv1
+FABRIC_START_TIMEOUT is unset, assuming 15 (seconds)
+
+#Detect architecture
+ARCH=`uname -m`
+uname -m
+
+# Grab the current directory
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+ cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd 
+ dirname "${BASH_SOURCE[0]}" 
+
+#
+
+ARCH=$ARCH docker-compose -f "${DIR}"/composer/docker-compose.yml down
+Removing network composer_default
+ARCH=$ARCH docker-compose -f "${DIR}"/composer/docker-compose.yml up -d
+Creating network "composer_default" with the default driver
+Creating orderer.example.com ... 
+Creating ca.org1.example.com ... 
+Creating couchdb ... 
+Creating ca.org1.example.com
+Creating couchdb
+Creating orderer.example.com
+[1A[2KCreating orderer.example.com ... [32mdone[0m[1B[1A[2KCreating couchdb ... [32mdone[0m[1BCreating peer0.org1.example.com ... 
+Creating peer0.org1.example.com
+[1A[2KCreating peer0.org1.example.com ... [32mdone[0m[1B[1A[2KCreating ca.org1.example.com ... [32mdone[0m[1B
+# wait for Hyperledger Fabric to start
+# incase of errors when running later commands, issue export FABRIC_START_TIMEOUT=<larger number>
+echo ${FABRIC_START_TIMEOUT}
+15
+sleep ${FABRIC_START_TIMEOUT}
+
+# Create the channel
+docker exec peer0.org1.example.com peer channel create -o orderer.example.com:7050 -c composerchannel -f /etc/hyperledger/configtx/composer-channel.tx
+[36m2018-09-06 09:16:05.453 UTC [msp] GetLocalMSP -> DEBU 001[0m Returning existing local MSP
+[36m2018-09-06 09:16:05.454 UTC [msp] GetDefaultSigningIdentity -> DEBU 002[0m Obtaining default signing identity
+2018-09-06 09:16:05.459 UTC [channelCmd] InitCmdFactory -> INFO 003[0m Endorser and orderer connections initialized
+[36m2018-09-06 09:16:05.459 UTC [msp] GetLocalMSP -> DEBU 004[0m Returning existing local MSP
+[36m2018-09-06 09:16:05.459 UTC [msp] GetDefaultSigningIdentity -> DEBU 005[0m Obtaining default signing identity
+[36m2018-09-06 09:16:05.460 UTC [msp] GetLocalMSP -> DEBU 006[0m Returning existing local MSP
+[36m2018-09-06 09:16:05.460 UTC [msp] GetDefaultSigningIdentity -> DEBU 007[0m Obtaining default signing identity
+[36m2018-09-06 09:16:05.460 UTC [msp/identity] Sign -> DEBU 008[0m Sign: plaintext: 0A8C060A074F7267314D53501280062D...6D706F736572436F6E736F727469756D 
+[36m2018-09-06 09:16:05.460 UTC [msp/identity] Sign -> DEBU 009[0m Sign: digest: 24333FCAF462B124CE36F545F54749E2B7DE3ABB873958C162F5C36956553349 
+[36m2018-09-06 09:16:05.461 UTC [msp] GetLocalMSP -> DEBU 00a[0m Returning existing local MSP
+[36m2018-09-06 09:16:05.461 UTC [msp] GetDefaultSigningIdentity -> DEBU 00b[0m Obtaining default signing identity
+[36m2018-09-06 09:16:05.461 UTC [msp] GetLocalMSP -> DEBU 00c[0m Returning existing local MSP
+[36m2018-09-06 09:16:05.461 UTC [msp] GetDefaultSigningIdentity -> DEBU 00d[0m Obtaining default signing identity
+[36m2018-09-06 09:16:05.462 UTC [msp/identity] Sign -> DEBU 00e[0m Sign: plaintext: 0AC9060A1B08021A0608D5E0C3DC0522...5298A7284D609D6E3E67D84DE38AB01A 
+[36m2018-09-06 09:16:05.462 UTC [msp/identity] Sign -> DEBU 00f[0m Sign: digest: BDCB8B4BCABACAEE7E4735F22D478839104B6F369DE5E05120A15F822337F220 
+[36m2018-09-06 09:16:05.676 UTC [msp] GetLocalMSP -> DEBU 010[0m Returning existing local MSP
+[36m2018-09-06 09:16:05.677 UTC [msp] GetDefaultSigningIdentity -> DEBU 011[0m Obtaining default signing identity
+[36m2018-09-06 09:16:05.677 UTC [msp] GetLocalMSP -> DEBU 012[0m Returning existing local MSP
+[36m2018-09-06 09:16:05.677 UTC [msp] GetDefaultSigningIdentity -> DEBU 013[0m Obtaining default signing identity
+[36m2018-09-06 09:16:05.678 UTC [msp/identity] Sign -> DEBU 014[0m Sign: plaintext: 0AC9060A1B08021A0608D5E0C3DC0522...FB44936B906212080A021A0012021A00 
+[36m2018-09-06 09:16:05.678 UTC [msp/identity] Sign -> DEBU 015[0m Sign: digest: D91B2324E01F7833198ED10DE626B9E79411A6E5507A682F3094BE7C1D0C975C 
+[36m2018-09-06 09:16:05.708 UTC [channelCmd] readBlock -> DEBU 016[0m Got status: &{NOT_FOUND}
+[36m2018-09-06 09:16:05.709 UTC [msp] GetLocalMSP -> DEBU 017[0m Returning existing local MSP
+[36m2018-09-06 09:16:05.709 UTC [msp] GetDefaultSigningIdentity -> DEBU 018[0m Obtaining default signing identity
+2018-09-06 09:16:05.711 UTC [channelCmd] InitCmdFactory -> INFO 019[0m Endorser and orderer connections initialized
+[36m2018-09-06 09:16:05.912 UTC [msp] GetLocalMSP -> DEBU 01a[0m Returning existing local MSP
+[36m2018-09-06 09:16:05.913 UTC [msp] GetDefaultSigningIdentity -> DEBU 01b[0m Obtaining default signing identity
+[36m2018-09-06 09:16:05.913 UTC [msp] GetLocalMSP -> DEBU 01c[0m Returning existing local MSP
+[36m2018-09-06 09:16:05.914 UTC [msp] GetDefaultSigningIdentity -> DEBU 01d[0m Obtaining default signing identity
+[36m2018-09-06 09:16:05.914 UTC [msp/identity] Sign -> DEBU 01e[0m Sign: plaintext: 0AC9060A1B08021A0608D5E0C3DC0522...11996DDE680712080A021A0012021A00 
+[36m2018-09-06 09:16:05.914 UTC [msp/identity] Sign -> DEBU 01f[0m Sign: digest: 95DDBC5C9EF8A14E9F45D228D3D5BBDB3252F966CFC7AED3A832DCFA7A55DB0F 
+[36m2018-09-06 09:16:05.923 UTC [channelCmd] readBlock -> DEBU 020[0m Received block: 0
+2018-09-06 09:16:05.923 UTC [main] main -> INFO 021[0m Exiting.....
+
+# Join peer0.org1.example.com to the channel.
+docker exec -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer0.org1.example.com peer channel join -b composerchannel.block
+[36m2018-09-06 09:16:06.174 UTC [msp] GetLocalMSP -> DEBU 001[0m Returning existing local MSP
+[36m2018-09-06 09:16:06.175 UTC [msp] GetDefaultSigningIdentity -> DEBU 002[0m Obtaining default signing identity
+2018-09-06 09:16:06.178 UTC [channelCmd] InitCmdFactory -> INFO 003[0m Endorser and orderer connections initialized
+[36m2018-09-06 09:16:06.179 UTC [msp/identity] Sign -> DEBU 004[0m Sign: plaintext: 0A89070A5B08011A0B08D6E0C3DC0510...140DB7F914CB1A080A000A000A000A00 
+[36m2018-09-06 09:16:06.179 UTC [msp/identity] Sign -> DEBU 005[0m Sign: digest: 277162EF6FFA15D8CB4F5007232C3D2F6AA46AA37996194CB4ADA68F488A9A74 
+2018-09-06 09:16:06.348 UTC [channelCmd] executeJoin -> INFO 006[0m Peer joined the channel!
+2018-09-06 09:16:06.349 UTC [main] main -> INFO 007[0m Exiting.....
+Development only script for Hyperledger Fabric control
+Running 'createPeerAdminCard.sh'
+FABRIC_VERSION is unset, assuming hlfv1
+FABRIC_START_TIMEOUT is unset, assuming 15 (seconds)
+
+Using composer-cli at v0.16.4
+Deleted Business Network Card: PeerAdmin@hlfv1
+
+Command succeeded
+
+
+Successfully created business network card file to 
+	Output file: /tmp/PeerAdmin@hlfv1.card
+
+Command succeeded
+
+
+Successfully imported business network card
+	Card file: /tmp/PeerAdmin@hlfv1.card
+	Card name: PeerAdmin@hlfv1
+
+Command succeeded
+
+Hyperledger Composer PeerAdmin card has been imported
+The following Business Network Cards are available:
+
+Connection Profile: fabric-network
+[90m┌──────────────────────────┬───────────┬──────────────────┐[39m
+[90m│[39m[31m Card Name                [39m[90m│[39m[31m UserId    [39m[90m│[39m[31m Business Network [39m[90m│[39m
+[90m├──────────────────────────┼───────────┼──────────────────┤[39m
+[90m│[39m PeerAdmin@fabric-network [90m│[39m PeerAdmin [90m│[39m                  [90m│[39m
+[90m├──────────────────────────┼───────────┼──────────────────┤[39m
+[90m│[39m admin@fabric-network     [90m│[39m admin     [90m│[39m fabric-network   [90m│[39m
+[90m└──────────────────────────┴───────────┴──────────────────┘[39m
+
+
+Connection Profile: hlfv1
+[90m┌────────────────────┬───────────┬──────────────────┐[39m
+[90m│[39m[31m Card Name          [39m[90m│[39m[31m UserId    [39m[90m│[39m[31m Business Network [39m[90m│[39m
+[90m├────────────────────┼───────────┼──────────────────┤[39m
+[90m│[39m admin@news-network [90m│[39m admin     [90m│[39m news-network     [90m│[39m
+[90m├────────────────────┼───────────┼──────────────────┤[39m
+[90m│[39m PeerAdmin@hlfv1    [90m│[39m PeerAdmin [90m│[39m                  [90m│[39m
+[90m└────────────────────┴───────────┴──────────────────┘[39m
+
+
+Issue composer card list --name <Card Name> to get details a specific card
+
+Command succeeded
+
+✔ Installing runtime for business network news-network. This may take a minute...
+
+Command succeeded
+
+Starting business network from archive: news-network@1.1.0.bna
+Business network definition:
+	Identifier: news-network@1.1.0
+	Description: The decentralized news network
+
+Processing these Network Admins: 
+	userName: admin
+
+✔ Starting business network definition. This may take a minute...
+Successfully created business network card:
+	Filename: admin@news-network
+
+Command succeeded
+
+Error: Card already exists: admin@news-network
+Command failed
+
+Discovering types from business network definition ...
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: selectAssetsbyOwner
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Added schemas for all types to Loopback
+Web server listening at: http://localhost:3000
+Browse your REST API at http://localhost:3000/explorer
+Change mysql connection password, admin's paths for 'key' & 'cert'.
+If password changed, then up Fabric Explorer.
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+
+> dtrace-provider@0.8.7 install /home/user/demo1/hyperledger_composer_demo/blockchain-explorer/node_modules/dtrace-provider
+> node-gyp rebuild || node suppress-error.js
+
+make: Entering directory '/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/node_modules/dtrace-provider/build'
+  TOUCH Release/obj.target/DTraceProviderStub.stamp
+make: Leaving directory '/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/node_modules/dtrace-provider/build'
+
+> pkcs11js@1.0.16 install /home/user/demo1/hyperledger_composer_demo/blockchain-explorer/node_modules/pkcs11js
+> node-gyp rebuild
+
+make: Entering directory '/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/node_modules/pkcs11js/build'
+  CXX(target) Release/obj.target/pkcs11/src/main.o
+  CXX(target) Release/obj.target/pkcs11/src/dl.o
+  CXX(target) Release/obj.target/pkcs11/src/const.o
+  CXX(target) Release/obj.target/pkcs11/src/pkcs11/error.o
+  CXX(target) Release/obj.target/pkcs11/src/pkcs11/v8_convert.o
+  CXX(target) Release/obj.target/pkcs11/src/pkcs11/template.o
+  CXX(target) Release/obj.target/pkcs11/src/pkcs11/mech.o
+  CXX(target) Release/obj.target/pkcs11/src/pkcs11/param.o
+  CXX(target) Release/obj.target/pkcs11/src/pkcs11/param_aes.o
+  CXX(target) Release/obj.target/pkcs11/src/pkcs11/param_rsa.o
+  CXX(target) Release/obj.target/pkcs11/src/pkcs11/param_ecdh.o
+  CXX(target) Release/obj.target/pkcs11/src/pkcs11/pkcs11.o
+  CXX(target) Release/obj.target/pkcs11/src/async.o
+  CXX(target) Release/obj.target/pkcs11/src/node.o
+  SOLINK_MODULE(target) Release/obj.target/pkcs11.node
+  COPY Release/pkcs11.node
+make: Leaving directory '/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/node_modules/pkcs11js/build'
+
+> websocket@1.0.26 install /home/user/demo1/hyperledger_composer_demo/blockchain-explorer/node_modules/websocket
+> (node-gyp rebuild 2> builderror.log) || (exit 0)
+
+make: Entering directory '/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/node_modules/websocket/build'
+  CXX(target) Release/obj.target/bufferutil/src/bufferutil.o
+  SOLINK_MODULE(target) Release/obj.target/bufferutil.node
+  COPY Release/bufferutil.node
+  CXX(target) Release/obj.target/validation/src/validation.o
+  SOLINK_MODULE(target) Release/obj.target/validation.node
+  COPY Release/validation.node
+make: Leaving directory '/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/node_modules/websocket/build'
+
+> grpc@1.10.1 install /home/user/demo1/hyperledger_composer_demo/blockchain-explorer/node_modules/grpc
+> node-pre-gyp install --fallback-to-build --library=static_library
+
+[grpc] Success: "/home/user/demo1/hyperledger_composer_demo/blockchain-explorer/node_modules/grpc/src/node/extension_binary/node-v57-linux-x64-glibc/grpc_node.node" is installed via remote
+npm notice created a lockfile as package-lock.json. You should commit this file.
+npm WARN fabric-explorer@0.0.1 No repository field.
+
+added 417 packages from 390 contributors and audited 1061 packages in 117.662s
+found 2 vulnerabilities (1 low, 1 moderate)
+  run `npm audit fix` to fix them, or `npm audit` for details
